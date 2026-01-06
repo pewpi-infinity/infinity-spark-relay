@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useKV } from '@github/spark/hooks'
 import { Website, Wallet, ViewMode, Token, Page, Transaction } from '@/lib/types'
 import { WorldArchetype } from '@/lib/worldTypes'
@@ -31,11 +31,33 @@ function App() {
   const [isCreating, setIsCreating] = useState(false)
   const [isAddingPage, setIsAddingPage] = useState(false)
 
+  useEffect(() => {
+    if (wallet && (wallet.infinityBalance === undefined || wallet.infinityBalance === null)) {
+      setWallet((current) => {
+        if (!current) return null
+        return {
+          ...current,
+          infinityBalance: 10000
+        }
+      })
+    }
+  }, [])
+
   const selectedWebsite = websites?.find(w => w.id === selectedWebsiteId)
   const isWebsiteOwned = selectedWebsite && wallet && selectedWebsite.ownerWallet === wallet.address
 
   const ensureWallet = (): Wallet => {
-    if (wallet) return wallet
+    if (wallet) {
+      if (wallet.infinityBalance === undefined || wallet.infinityBalance === null) {
+        const updatedWallet = {
+          ...wallet,
+          infinityBalance: 10000
+        }
+        setWallet(updatedWallet)
+        return updatedWallet
+      }
+      return wallet
+    }
 
     const newWallet: Wallet = {
       address: generateWalletAddress(),

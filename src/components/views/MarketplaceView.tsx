@@ -49,7 +49,7 @@ export function MarketplaceView({ websites, currentWallet, onBack, onViewWebsite
               Every website is a token backed by working tools. Browse live websites with functional components, 
               and trade using Infinity (∞) as the settlement currency. More tools = more value.
             </p>
-            {currentWallet && (
+            {currentWallet && currentWallet.infinityBalance !== undefined && (
               <p className="text-sm font-semibold text-accent">
                 Your Balance: {currentWallet.infinityBalance.toLocaleString()} ∞
               </p>

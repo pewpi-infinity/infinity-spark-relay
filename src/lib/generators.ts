@@ -39,7 +39,10 @@ export function calculateWebsiteValue(website: Website): number {
   return Math.floor(totalValue)
 }
 
-export function formatValue(value: number): string {
+export function formatValue(value: number | undefined): string {
+  if (value === undefined || value === null || isNaN(value)) {
+    return '0 ∞'
+  }
   return `${value.toLocaleString()} ∞`
 }
 

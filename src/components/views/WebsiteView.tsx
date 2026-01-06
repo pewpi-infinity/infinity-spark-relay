@@ -222,7 +222,7 @@ export function WebsiteView({
             <Badge variant="outline" className="text-accent border-accent/50 text-base px-4 py-1">
               {formatValue(website.value)}
             </Badge>
-            {website.isListedForSale && website.salePrice && (
+            {website.isListedForSale && website.salePrice !== undefined && (
               <Badge className="bg-accent text-accent-foreground text-base px-4 py-1">
                 For Sale: {website.salePrice.toLocaleString()} ∞
               </Badge>

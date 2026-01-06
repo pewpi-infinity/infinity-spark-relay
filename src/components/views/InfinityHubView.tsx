@@ -46,7 +46,7 @@ export function InfinityHubView({
             Back to Entry
           </Button>
 
-          {wallet && (
+          {wallet && wallet.infinityBalance !== undefined && (
             <div className="flex items-center gap-4 px-4 py-2 cosmic-border rounded-lg bg-card/50">
               <WalletIcon size={24} className="text-accent" />
               <div className="flex flex-col">

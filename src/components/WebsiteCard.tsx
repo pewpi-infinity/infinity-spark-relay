@@ -40,7 +40,7 @@ export function WebsiteCard({ website, isOwned = false, onView, onPurchase, show
           <Badge variant="outline" className="text-accent border-accent/50">
             {formatValue(website.value)}
           </Badge>
-          {website.isListedForSale && website.salePrice && (
+          {website.isListedForSale && website.salePrice !== undefined && (
             <Badge className="bg-accent text-accent-foreground">
               {website.salePrice.toLocaleString()} ∞
             </Badge>
@@ -72,7 +72,7 @@ export function WebsiteCard({ website, isOwned = false, onView, onPurchase, show
           )}
         </div>
 
-        {showPurchase && website.isListedForSale && website.salePrice && onPurchase ? (
+        {showPurchase && website.isListedForSale && website.salePrice !== undefined && onPurchase ? (
           <Button
             className="w-full cosmic-glow bg-accent text-accent-foreground hover:bg-accent/90"
             onClick={(e) => {
